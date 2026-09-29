@@ -1,8 +1,13 @@
+import os
 from flask import Flask, render_template, request
 
-app = Flask(name)
+# تحديد مسار المجلد الحالي بشكل دقيق لـ Vercel
+base_dir = os.path.dirname(os.path.abspath(file))
+template_dir = os.path.join(base_dir, 'templates')
 
-# Sample student data
+app = Flask(name, template_folder=template_dir)
+
+# قائمة البيانات بالإنجليزية
 STUDENTS = [
     {"id": "STD-1001", "name": "Adel Imam", "grade": "Grade 10 - A", "gpa": "3.8", "status": "Passed"},
     {"id": "STD-1002", "name": "Fatima Zahra", "grade": "Grade 11 - B", "gpa": "4.0", "status": "Excellent"},
@@ -16,7 +21,6 @@ def index():
     results = []
     
     if query:
-        # Search by student name or ID
         results = [
             student for student in STUDENTS 
             if query.lower() in student["name"].lower() or query.lower() in student["id"].lower()
@@ -24,5 +28,4 @@ def index():
 
     return render_template("index.html", query=query, results=results)
 
-if name == "main":
-    app.run(debug=True)
+# Vercel يتطلب وجود متغير app
