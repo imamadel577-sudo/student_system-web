@@ -35,4 +35,5 @@ def home():
         name=name
     )
 
-app.run(debug=True)
+if name == "main":
+    app.run(debug=True)
