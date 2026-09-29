@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="glass-card">
+        <header>
+            <div class="icon-header">🎓</div>
+            <h1>Student Portal</h1>
+            <p>Enter your full name to view your record</p>
+        </header>
+
+        <div class="search-box">
+            <div class="input-field">
+                <input type="text" id="studentName" placeholder="e.g. Yasser Zriouh" autocomplete="off" onkeypress="handleKeyPress(event)">
+            </div>
+            <button onclick="searchStudent()">Search</button>
+        </div>
+
+        <!-- Result Card -->
+        <div id="resultCard" class="result-card hidden">
+            <div class="profile-header">
+                <div class="avatar" id="avatarLetter">Y</div>
+                <h2 id="studentTitle">Student Name</h2>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="label">Age</span>
+                    <span id="studentAge" class="value">--</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Class</span>
+                    <span id="studentClass" class="value">--</span>
+                </div>
+                <div class="info-item highlight-box">
+                    <span class="label">Grade</span>
+                    <span id="studentGrade" class="value highlight">-- / 20</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Alert -->
+        <div id="errorMessage" class="error-card hidden">
+            <span>⚠️</span> Student not found! Check spelling.
+        </div>
+    </div>
+
+    <script>
+        async function searchStudent() {
+            const nameInput = document.getElementById('studentName').value;
+            const resultCard = document.getElementById('resultCard');
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (!nameInput.trim()) {
+                alert("Please enter a student name!");
+                return;
+            }
+
+            try {
+                const response = await fetch('/get_student', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name: nameInput })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    const student = result.student;
+                    document.getElementById('studentTitle').innerText = student.name;
+                    document.getElementById('avatarLetter').innerText = student.name.charAt(0).toUpperCase();
+                    document.getElementById('studentAge').innerText = student.age;
+                    document.getElementById('studentClass').innerText = student.class;
+                    document.getElementById('studentGrade').innerText = ${student.grade} / 20;
+
+                    resultCard.classList.remove('hidden');
+                    errorMessage.classList.add('hidden');
+                } else {
+                    errorMessage.classList.remove('hidden');
+                    resultCard.classList.add('hidden');
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                searchStudent();
+            }
+        }
+    </script>
+</body>
+</html>
