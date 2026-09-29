@@ -1,34 +1,153 @@
-<th class="p-3">GPA</th>
-                                <th class="p-3">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100">
-                            {% for student in results %}
-                            <tr>
-                                <td class="p-3 font-mono text-xs text-slate-500">{{ student.id }}</td>
-                                <td class="p-3 font-bold text-slate-900">{{ student.name }}</td>
-                                <td class="p-3">{{ student.grade }}</td>
-                                <td class="p-3 font-bold text-cyan-600">{{ student.gpa }}</td>
-                                <td class="p-3">
-                                    <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full font-semibold">{{ student.status }}</span>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            {% else %}
-                <p class="text-slate-500 text-sm text-center py-4">No student found with that name.</p>
-            {% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Information System</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #cbd5e1;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            margin-bottom: 12px;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .result {
+            margin-top: 20px;
+            background: white;
+            color: #0f172a;
+            padding: 20px;
+            border-radius: 18px;
+            text-align: left;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+
+        .result h2 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .result p {
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .not-found {
+            margin-top: 20px;
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 15px;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Student Information</h1>
+        <p class="subtitle">Search for a student</p>
+
+        <div class="search-box">
+
+            <form method="POST">
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter full name"
+                    required
+                >
+
+                <button type="submit">SEARCH</button>
+            </form>
+
         </div>
+
+        {% if student %}
+
+        <div class="result">
+            <h2>Student Information</h2>
+
+            <p><strong>Name:</strong> {{ name }}</p>
+            <p><strong>Age:</strong> {{ student["age"] }}</p>
+            <p><strong>Class:</strong> {{ student["class"] }}</p>
+            <p><strong>Grade:</strong> {{ student["grade"] }}</p>
+        </div>
+
+        {% elif name %}
+
+        <div class="not-found">
+            Student not found.
+        </div>
+
         {% endif %}
 
-    </main>
-
-    <!-- Footer -->
-    <footer class="py-6 text-center text-xs text-cyan-200/50">
-        <p>&copy; 2026 Student Information System. All rights reserved.</p>
-    </footer>
+    </div>
 
 </body>
-</html>
+</html>s
