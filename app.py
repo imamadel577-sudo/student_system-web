@@ -1,39 +1,28 @@
 from flask import Flask, render_template, request
 
-app = Flask(__name__)
+app = Flask(name)
 
-students = {
-    "Yasser Zriouh": {
-        "age": 15,
-        "class": "TCSF-1",
-        "grade": 12
-    },
-    "Sanoubari Mohamed": {
-        "age": 17,
-        "class": "TCSF-1",
-        "grade": 15
-    },
-    "Anas Dali": {
-        "age": 5,
-        "class": "TCSF-1",
-        "grade": 10
-    }
-}
+# Sample student data
+STUDENTS = [
+    {"id": "STD-1001", "name": "Adel Imam", "grade": "Grade 10 - A", "gpa": "3.8", "status": "Passed"},
+    {"id": "STD-1002", "name": "Fatima Zahra", "grade": "Grade 11 - B", "gpa": "4.0", "status": "Excellent"},
+    {"id": "STD-1003", "name": "John Doe", "grade": "Grade 10 - C", "gpa": "2.9", "status": "Active"},
+    {"id": "STD-1004", "name": "Sarah Smith", "grade": "Grade 12 - A", "gpa": "3.6", "status": "Passed"}
+]
 
-@app.route("/", methods=["GET", "POST"])
-def home():
-    student = None
-    name = ""
+@app.route("/", methods=["GET"])
+def index():
+    query = request.args.get("query", "").strip()
+    results = []
+    
+    if query:
+        # Search by student name or ID
+        results = [
+            student for student in STUDENTS 
+            if query.lower() in student["name"].lower() or query.lower() in student["id"].lower()
+        ]
 
-    if request.method == "POST":
-        name = request.form["name"]
-        student = students.get(name)
+    return render_template("index.html", query=query, results=results)
 
-    return render_template(
-        "index.html",
-        student=student,
-        name=name
-    )
-
-#if name == "main":
-#    app.run(debug=True)
+if name == "main":
+    app.run(debug=True)
