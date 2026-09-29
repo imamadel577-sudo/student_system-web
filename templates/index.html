@@ -1,153 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<img src="https://images.unsplash.com/photo-1511497584788-876761c119ee?auto=format&fit=crop&w=600&q=80" alt="Graphic Design" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Graphic Design</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Logos, merchandise and more. Anyone can create nice graphics. We think it's better to create memorable ones.
+                    </p>
+                </div>
+            </div>
 
-    <title>Student Information System</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #0f172a, #1e3a8a);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            color: #cbd5e1;
-            margin-bottom: 30px;
-        }
-
-        .search-box {
-            background: white;
-            padding: 25px;
-            border-radius: 18px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-
-        input {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 16px;
-            outline: none;
-            margin-bottom: 12px;
-        }
-
-        input:focus {
-            border-color: #2563eb;
-        }
-
-        button {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            background: #2563eb;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #1d4ed8;
-        }
-
-        .result {
-            margin-top: 20px;
-            background: white;
-            color: #0f172a;
-            padding: 20px;
-            border-radius: 18px;
-            text-align: left;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-        }
-
-        .result h2 {
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .result p {
-            padding: 8px 0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .not-found {
-            margin-top: 20px;
-            background: #fee2e2;
-            color: #991b1b;
-            padding: 15px;
-            border-radius: 12px;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="container">
-
-        <h1>Student Information</h1>
-        <p class="subtitle">Search for a student</p>
-
-        <div class="search-box">
-
-            <form method="POST">
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Enter full name"
-                    required
-                >
-
-                <button type="submit">SEARCH</button>
-            </form>
+            <!-- Card 3 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?auto=format&fit=crop&w=600&q=80" alt="Content Creation" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Content Creation</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Want to attract people to your website? You have to have the best content in the world. That's what we do.
+                    </p>
+                </div>
+            </div>
 
         </div>
+    </section>
 
-        {% if student %}
+    <!-- About Us Section -->
+    <section id="about" class="py-16 px-6 bg-white border-t border-slate-100">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            
+            <div>
+                <h2 class="text-2xl font-bold tracking-wider text-slate-800 mb-4 uppercase">ABOUT US</h2>
+                <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                    I made it so it is super easy to update and so that it flows perfectly with my tutorials. Lots of love and hundreds of hours went into making it.
+                </p>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    I hope you love it as much as I do. I wish you the best of luck with your business, enjoy the adventure.
+                </p>
+            </div>
 
-        <div class="result">
-            <h2>Student Information</h2>
+            <div class="rounded-xl overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80" alt="About Landscape" class="w-full h-64 object-cover">
+            </div>
 
-            <p><strong>Name:</strong> {{ name }}</p>
-            <p><strong>Age:</strong> {{ student["age"] }}</p>
-            <p><strong>Class:</strong> {{ student["class"] }}</p>
-            <p><strong>Grade:</strong> {{ student["grade"] }}</p>
         </div>
+    </section>
 
-        {% elif name %}
-
-        <div class="not-found">
-            Student not found.
-        </div>
-
-        {% endif %}
-
-    </div>
+    <!-- Footer -->
+    <footer class="py-8 bg-slate-900 text-center text-xs text-slate-400">
+        <p>&copy; 2026 EARTH - Student Information System. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>
